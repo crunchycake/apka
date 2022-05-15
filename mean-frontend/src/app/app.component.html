@@ -1,0 +1,34 @@
+<h3>odczyt z bazy danych</h3>
+
+
+<ul>
+  <li *ngFor="let item of allVisitorsDataArray">
+    {{item.visitorName}} | {{item.visitorFamilyName}} | {{item.visitorDate}} | {{item.visitorDataForm}} |
+    {{item.visitorHours}} | {{item.visitorInstitution}}
+  </li>
+</ul>
+
+
+
+<h3>Dodaj dane do bazy</h3>
+
+<form [formGroup]="visitorDataForm" (ngSubmit)="addVisitDetails()">
+
+  <input type="text" formControlName="visitorName" placeholder="podaj imię">
+  <input type="text" formControlName="visitorFamilyName" placeholder="podaj nazwisko">
+  <input type="date" formControlName="visitorDate">
+  <select name="" id="" formControlName="visitorHours">
+    <option value="8"> 8 </option>
+    <option value="9"> 9 </option>
+    <option value="10"> 10 </option>
+  </select>
+  <input type="text " formControlName="visitorInstitution" placeholder="instytucja">
+  <input type="text " formControlName="visitorComment" placeholder="wpisz komentarz">
+
+  <button type="submit" [disabled]="visitorDataForm.invalid">Dodaj</button>
+
+
+
+
+
+</form>
