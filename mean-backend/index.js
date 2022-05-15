@@ -15,3 +15,5 @@ app.use('/api/visitorData', require('./routes/visitorDataRoutes'));
 app.listen(4700, () => {
     console.log("Backend działa na porcie 4700")
     });
+
+

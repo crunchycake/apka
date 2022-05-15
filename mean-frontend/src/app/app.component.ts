@@ -10,6 +10,7 @@ import { VisitorDataService } from './services/visitor-data.service';
 export class AppComponent {
   visitorDataForm: FormGroup;
   allVisitorsDataArray: any = [];
+  visitorDataFormEdit: any = [];
 
   constructor(
     private visitorDataService: VisitorDataService,
@@ -22,6 +23,15 @@ export class AppComponent {
       visitorHours: ['', Validators.required],
       visitorInstitution: [''],
       visitorComment: [''],
+    });
+
+    this.visitorDataFormEdit = this.fb.group({
+      visitorNameEdit: ['', Validators.required],
+      visitorFamilyNameEdit: ['', Validators.required],
+      visitorDateEdit: ['', Validators.required],
+      visitorHoursEdit: ['', Validators.required],
+      visitorInstitutionEdit: [''],
+      visitorCommentEdit: [''],
     });
   }
 
@@ -61,8 +71,46 @@ export class AppComponent {
       console.log(data);
     });
   }
+dataFormEditedForm:any;
 
-  
+  editVisitorData(checkedVisitorData:any){
+    console.log(checkedVisitorData)
 
+this.dataFormEditedForm = checkedVisitorData
+
+    this.visitorDataFormEdit.setValue({
+      visitorNameEdit: checkedVisitorData.visitorName,
+      visitorFamilyNameEdit: checkedVisitorData.visitorFamilyName,
+      visitorDateEdit: checkedVisitorData.visitorDate,
+      visitorHoursEdit: checkedVisitorData.visitorHours,
+      visitorInstitutionEdit: checkedVisitorData.visitorInstitution,
+      visitorCommentEdit: checkedVisitorData.visitorComment
+    })
+  }
+
+addVisitDetailsEdit(){
+  console.log(this.dataFormEditedForm)
+
+  const noweDane = {
+    _id: this.dataFormEditedForm._id,
+    visitorName: this.visitorDataFormEdit.get('visitorNameEdit')?.value,
+    visitorFamilyName: this.visitorDataFormEdit.get('visitorFamilyNameEdit')?.value,
+    visitorDate: this.visitorDataFormEdit.get('visitorDateEdit')?.value,
+    visitorHours: this.visitorDataFormEdit.get('visitorHoursEdit')?.value,
+    visitorInstitution: this.visitorDataFormEdit.get('visitorInstitutionEdit')?.value,
+    visitorComment: this.visitorDataFormEdit.get('visitorCommentEdit')?.value,
+  }
+  console.log("po edycji", noweDane);
+
+  this.visitorDataService.editVisitorData(noweDane).subscribe( (data: any) => {
+    this.getAllVisitorsData();
+  })
+  }
+
+deleteVisitor(item: any) {
+  this.visitorDataService.removeVisitorData(item).subscribe( () => {
+    this.getAllVisitorsData()
+  })
+}
 
 }

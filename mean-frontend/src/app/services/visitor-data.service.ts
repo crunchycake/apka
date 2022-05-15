@@ -6,7 +6,6 @@ import { Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class VisitorDataService {
-
   url: string = 'http://localhost:4700/api/visitorData';
 
   constructor(private http: HttpClient) {}
@@ -19,5 +18,11 @@ export class VisitorDataService {
     return this.http.get(this.url);
   }
 
-  
+  editVisitorData(visitDataEdit: any): Observable<any> {
+    return this.http.put(this.url + '/' + visitDataEdit._id, visitDataEdit);
+  }
+
+  removeVisitorData(removeData: any): Observable<any> {
+    return this.http.delete(this.url + '/' + removeData._id);
+  }
 }

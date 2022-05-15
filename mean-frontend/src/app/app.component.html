@@ -3,8 +3,11 @@
 
 <ul>
   <li *ngFor="let item of allVisitorsDataArray">
-    {{item.visitorName}} | {{item.visitorFamilyName}} | {{item.visitorDate}} | {{item.visitorDataForm}} |
+
+    <input type="radio" name="radio" (click)="editVisitorData(item)">
+  {{item.visitorName}} | {{item.visitorFamilyName}} | {{item.visitorDate}} | {{item.visitorDataForm}} |
     {{item.visitorHours}} | {{item.visitorInstitution}}
+    <button type="button" (click)="deleteVisitor(item)">usuń</button>
   </li>
 </ul>
 
@@ -14,7 +17,7 @@
 
 <form [formGroup]="visitorDataForm" (ngSubmit)="addVisitDetails()">
 
-  <input type="text" formControlName="visitorName" placeholder="podaj imię">
+  <input  type="text"  formControlName="visitorName" placeholder="podaj imię">
   <input type="text" formControlName="visitorFamilyName" placeholder="podaj nazwisko">
   <input type="date" formControlName="visitorDate">
   <select name="" id="" formControlName="visitorHours">
@@ -28,7 +31,25 @@
   <button type="submit" [disabled]="visitorDataForm.invalid">Dodaj</button>
 
 
+</form>
 
+<h3>Dane przeniesione - edycja</h3>
+
+
+<form [formGroup]="visitorDataFormEdit" (ngSubmit)="addVisitDetailsEdit()">
+
+  <input  type="text"  formControlName="visitorNameEdit" placeholder="podaj imię">
+  <input type="text" formControlName="visitorFamilyNameEdit" placeholder="podaj nazwisko">
+  <input type="date" formControlName="visitorDateEdit">
+  <select name="" id="" formControlName="visitorHoursEdit">
+    <option value="8"> 8 </option>
+    <option value="9"> 9 </option>
+    <option value="10"> 10 </option>
+  </select>
+  <input type="text " formControlName="visitorInstitutionEdit" placeholder="instytucja">
+  <input type="text " formControlName="visitorCommentEdit" placeholder="wpisz komentarz">
+
+  <button type="submit" [disabled]="visitorDataFormEdit.invalid">Edytuj</button>
 
 
 </form>

@@ -4,6 +4,9 @@ const visitorDataController = require('./../controllers/visitorDataControllers')
 
 router.post('/', visitorDataController.createVisitorData);
 router.get('/', visitorDataController.getAllVisitorsData);
-router.get('/:jakasdata', visitorDataController.filterByDate);
+router.get('/:jakasData', visitorDataController.filterByDate);
+router.put('/:_id', visitorDataController.editSingleVisitorData)
+router.delete('/:_id', visitorDataController.removeSingleVisitorData)
+
 
 module.exports = router;
